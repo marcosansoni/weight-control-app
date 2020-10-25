@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { BrowserRouter, Redirect, Route } from 'react-router-dom'
 import React from 'react'
-import sessionSelector from './store/session/selectors/sessionSelector'
+import tokenSelector from './store/session/selectors/tokenSelector'
 import Login from './pages/Login'
 
 const Page = styled.div`
@@ -20,7 +20,7 @@ const Routes = {
 
 
 const Routing = () => {
-  const session = useSelector(sessionSelector)
+  const session = useSelector(tokenSelector)
 
   return (
     <Page>

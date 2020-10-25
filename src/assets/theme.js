@@ -17,7 +17,8 @@ export const palette = {
   GREY_SUPER_LIGHT: '#f2f2f2',
   // Primary
   WHITE: '#ffffff',
-  PRIMARY_LIGHT: '#BDEFEA',
+  // PRIMARY_LIGHT: '#BDEFEA',
+  PRIMARY_LIGHT: '#68ad40',
   PRIMARY_STANDARD: '#40c1bb',
   PRIMARY_SHADOW: '#24adad',
   PRIMARY_DARK: '#0b7f8e',

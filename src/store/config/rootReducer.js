@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import sessionReducer from '../session/sessionReducer'
 import themeReducer from '../theme/themeReducer'
+import sessionCombinedReducers from '../session/combinedReducers'
+import loginCombinedReducers from '../login/combinedReducers'
 
 export default combineReducers({
-  session: sessionReducer,
+  login: loginCombinedReducers,
+  session: sessionCombinedReducers,
   theme: themeReducer,
 })

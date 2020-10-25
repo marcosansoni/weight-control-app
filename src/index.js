@@ -2,11 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import { ThemeProvider } from 'styled-components'
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
 import configureStore from './store/config/configureStore'
 import theme from './assets/theme'
 import Routing from './Routing'
-import "antd/dist/antd.css";
 
 const store = configureStore()
 
@@ -20,6 +19,5 @@ ReactDOM.render(
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
+  document.getElementById('root')
 )
-

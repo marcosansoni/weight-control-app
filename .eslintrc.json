@@ -24,6 +24,7 @@
   "rules": {
     "import/no-named-as-default-member": "off",
     "import/no-named-as-default": "off",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
