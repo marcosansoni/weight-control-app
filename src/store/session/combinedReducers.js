@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import tokenReducer from './reducer/tokenReducer'
-import usernameReducer from './reducer/usernameReducer'
+import emailReducer from './reducer/emailReducer'
 import profileReducer from './reducer/profileReducer'
 
 const sessionCombinedReducers = combineReducers({
   token: tokenReducer,
-  username: usernameReducer,
+  email: emailReducer,
   profile: profileReducer,
 })
 

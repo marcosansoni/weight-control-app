@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
+import { useDispatch, useSelector } from 'react-redux'
+import Snackbar from '@material-ui/core/Snackbar'
+import { useHistory } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import logo from '../assets/images/login.svg'
 import useValidation from '../utils/validation/useValidation'
 import requiredValidator from '../utils/validation/commonValidators/requiredValidator'
@@ -9,6 +13,11 @@ import Field from '../components/Field'
 import { Color } from '../assets/theme'
 import ValidationStatus from '../utils/validation/ValidationStatus'
 import Size from '../utils/size/Size'
+import loginRequestActionCreator from '../store/login/actionCreator/loginRequestActionCreator'
+import errorSelectorFactory from '../store/common/selectors/errorsSelectorFactory'
+import loginCompleteActionCreator from '../store/login/actionCreator/loginCompleteActionCreator'
+import tokenSelector from '../store/session/selectors/tokenSelector'
+import isFetchingSelectorFactory from '../store/common/selectors/isFetchingSelectorFactory'
 
 const ContainerLogin = styled.div`
   background-color: #f9ede5;
@@ -61,13 +70,21 @@ const StyledButton = styled(Button)`
   height: ${Size.PX_40};
 `
 
+const ContentButton = styled.div`
+  color: ${(p) => p.theme[Color.BACKGROUND]};
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const Login = () => {
   const {
-    value: username,
-    onChange: onChangeUsername,
-    hiddenError: hiddenErrorUsername,
-    status: statusUsername,
-    errors: errorsUsername,
+    value: email,
+    onChange: onChangeEmail,
+    hiddenError: hiddenErrorEmail,
+    status: statusEmail,
+    errors: errorsEmail,
   } = useValidation({ validators: [requiredValidator] })
 
   const {
@@ -81,26 +98,60 @@ const Login = () => {
     defaultHiddenError: true,
   })
 
+  const history = useHistory()
+
+  const dispatch = useDispatch()
+  const errors = useSelector(errorSelectorFactory('login'))
+  const token = useSelector(tokenSelector)
+  const isFetching = useSelector(isFetchingSelectorFactory('login'))
+
+  console.log(isFetching)
+
+  const [open, setOpen] = useState(errors.length)
+
+  const handleCloseSnackbar = () => {
+    setOpen(false)
+    dispatch(loginCompleteActionCreator({ errors: [] }))
+  }
+
+  useEffect(() => {
+    if (errors.length && !open) setOpen(true)
+  }, [JSON.stringify(errors)])
+
+  if (token) {
+    history.push('/')
+  }
+
+  const disabledButton =
+    isFetching ||
+    statusEmail === ValidationStatus.ERROR ||
+    statusPassword === ValidationStatus.ERROR
+
   return (
     <ContainerLogin>
       <ContainerData>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={open}
+          onClose={handleCloseSnackbar}
+          message={errors.length ? errors[0] : ''}
+          key="error"
+        />
         <ContainerImage>
           <Image src={logo} alt="Logo" />
         </ContainerImage>
         <Brand>Weight Control</Brand>
         <Field
           style={{ paddingBottom: 16, paddingTop: 24 }}
-          description={errorsUsername.length ? errorsUsername[0] : ''}
-          status={hiddenErrorUsername ? ValidationStatus.VALID : statusUsername}
+          description={errorsEmail.length ? errorsEmail[0] : ''}
+          status={hiddenErrorEmail ? ValidationStatus.VALID : statusEmail}
         >
           <Input
-            label="Username"
-            value={username}
-            onChange={(e) => onChangeUsername(e.target.value, true)}
-            onBlur={() => onChangeUsername(username, false)}
-            status={
-              hiddenErrorUsername ? ValidationStatus.VALID : statusUsername
-            }
+            label="Email"
+            value={email}
+            onChange={(e) => onChangeEmail(e.target.value, true)}
+            onBlur={() => onChangeEmail(email, false)}
+            status={hiddenErrorEmail ? ValidationStatus.VALID : statusEmail}
             fullWidth
           />
         </Field>
@@ -122,13 +173,19 @@ const Login = () => {
           />
         </Field>
         <StyledButton
-          disabled={
-            statusUsername === ValidationStatus.ERROR ||
-            statusPassword === ValidationStatus.ERROR
-          }
-          onClick={() => console.log('Loginaa')}
+          disabled={disabledButton}
+          onClick={() => dispatch(loginRequestActionCreator(email, password))}
         >
-          Login
+          <ContentButton>
+            {isFetching && (
+              <CircularProgress
+                size={24}
+                color="inherit"
+                style={{ position: 'absolute' }}
+              />
+            )}
+            Login
+          </ContentButton>
         </StyledButton>
       </ContainerData>
     </ContainerLogin>

@@ -6,28 +6,33 @@ import loginCompleteActionCreator from '../actionCreator/loginCompleteActionCrea
 export const defaultError = ['Error while handling the request']
 
 function* loginWorker(action) {
-  const { username, password } = action?.payload || {}
+  try {
+    const { email, password } = action?.payload || {}
 
-  const response = yield postData({
-    url: urlFactory(PathAPI.LOGIN),
-    data: { username, password },
-  })
+    console.log(urlFactory())
 
-  const { data, status } = response || {}
-  const { success, result, errors = defaultError } = data || {}
+    const response = yield postData({
+      url: urlFactory(PathAPI.LOGIN),
+      data: { email, password },
+    })
 
-  if (!success || status !== 200)
-    yield put(loginCompleteActionCreator({ errors }))
+    const { data, status } = response || {}
+    const { success, result, errors = defaultError } = data || {}
 
-  if (status === 200 && success) {
-    yield put(loginCompleteActionCreator({ errors }))
-    // const session = data.code
-    // yield put(
-    //   actionCreator(SessionActionType.POST_LOGIN, { username, session })
-    // )
+    if (!success || status !== 200)
+      return yield put(loginCompleteActionCreator({ errors }))
+
+    if (status === 200 && success) {
+      const { token } = result
+      return yield put(loginCompleteActionCreator({ token, email }))
+    }
+
+    return yield put(loginCompleteActionCreator({}))
+  } catch (e) {
+    console.log(e)
+    // Stop fetching into all the other scenario
+    return yield put(loginCompleteActionCreator({}))
   }
-
-  return yield put({ type: SessionActionType.POST_LOGIN })
 }
 
 export default loginWorker

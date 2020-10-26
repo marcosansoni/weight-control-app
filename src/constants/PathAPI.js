@@ -1,7 +1,7 @@
 const PathAPI = {
-  LOGIN: '/login',
+  LOGIN: '/session/login',
   LOGOUT: '/logout',
-  REGISTER: '/register',
+  REGISTER: '/session/register',
   // USER: {
   //   ALL: '/user',
   //   FRIEND: '/user/friend',
@@ -49,10 +49,10 @@ const PathAPI = {
   //   HEIGHT: '/realPlayer/height',
   //   WEIGHT: '/realPlayer/weight',
   // },
-};
+}
 
-const BASE_PATH = process.env.REACT_APP_BASE_PATH;
+const BASE_PATH = process.env.REACT_APP_BASE_PATH
 
-export const urlFactory = (endpoint = '') => BASE_PATH + endpoint;
+export const urlFactory = (endpoint = '') => `${BASE_PATH  }/api${  endpoint}`
 
-export default PathAPI;
+export default PathAPI

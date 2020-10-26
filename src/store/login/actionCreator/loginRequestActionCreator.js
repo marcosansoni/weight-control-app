@@ -1,8 +1,8 @@
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 
-const loginRequestActionCreator = (username, password) => ({
+const loginRequestActionCreator = (email, password) => ({
   type: LOGIN_REQUEST,
-  payload: { username, password },
+  payload: { email, password },
 })
 
 export default loginRequestActionCreator

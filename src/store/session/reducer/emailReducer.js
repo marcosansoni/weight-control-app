@@ -1,13 +1,13 @@
 import { LOGIN } from '../../login/actionCreator/loginCompleteActionCreator'
 
-const usernameReducer = (state = null, action) => {
+const emailReducer = (state = null, action) => {
   switch (action.type) {
     case LOGIN:
-      if (action?.payload?.username) return action.payload.username
+      if (action?.payload?.email) return action.payload.email
       return state
     default:
       return state
   }
 }
 
-export default usernameReducer
+export default emailReducer

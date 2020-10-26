@@ -1,16 +1,16 @@
 export const LOGIN = 'LOGIN'
 
 const loginCompleteActionCreator = ({
-  username,
+  email,
   token,
   errors,
   ...otherInfo
 }) => ({
   type: LOGIN,
   payload: {
-    token,
-    username,
-    ...(errors && errors.length && { errors }),
+    ...(token && { token }),
+    ...(email && { email }),
+    ...(errors && Array.isArray(errors) && { errors }),
     ...otherInfo,
   },
 })
