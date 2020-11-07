@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
+import 'react-perfect-scrollbar/dist/css/styles.css';
 import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 import configureStore from './store/config/configureStore'

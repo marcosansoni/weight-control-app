@@ -2,6 +2,8 @@ import { put } from 'redux-saga/effects'
 import postData from '../../utils/fetchMethod/postData'
 import PathAPI, { urlFactory } from '../../../constants/PathAPI'
 import loginCompleteActionCreator from '../actionCreator/loginCompleteActionCreator'
+import stopFetchingActionCreatorFactory from '../../common/actionCreator/stopFetchingActionCreatorFactory'
+import View from '../../View'
 
 export const defaultError = ['Error while handling the request']
 
@@ -31,7 +33,7 @@ function* loginWorker(action) {
   } catch (e) {
     console.log(e)
     // Stop fetching into all the other scenario
-    return yield put(loginCompleteActionCreator({}))
+    return yield put(stopFetchingActionCreatorFactory(View.LOGIN))
   }
 }
 

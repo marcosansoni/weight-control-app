@@ -19,7 +19,10 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "jsx-a11y",
+    "import",
+    "react-hooks"
   ],
   "rules": {
     "import/no-named-as-default-member": "off",

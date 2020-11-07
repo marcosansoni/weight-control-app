@@ -1,3 +1,3 @@
-const errorSelectorFactory = (entity) => (state) => state[entity].errors
+const errorSelectorFactory = (view) => (state) => state[view].errors
 
 export default errorSelectorFactory

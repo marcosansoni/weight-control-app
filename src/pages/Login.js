@@ -18,6 +18,7 @@ import errorSelectorFactory from '../store/common/selectors/errorsSelectorFactor
 import loginCompleteActionCreator from '../store/login/actionCreator/loginCompleteActionCreator'
 import tokenSelector from '../store/session/selectors/tokenSelector'
 import isFetchingSelectorFactory from '../store/common/selectors/isFetchingSelectorFactory'
+import Routes from '../Routes'
 
 const ContainerLogin = styled.div`
   background-color: #f9ede5;
@@ -105,8 +106,6 @@ const Login = () => {
   const token = useSelector(tokenSelector)
   const isFetching = useSelector(isFetchingSelectorFactory('login'))
 
-  console.log(isFetching)
-
   const [open, setOpen] = useState(errors.length)
 
   const handleCloseSnackbar = () => {
@@ -118,9 +117,7 @@ const Login = () => {
     if (errors.length && !open) setOpen(true)
   }, [JSON.stringify(errors)])
 
-  if (token) {
-    history.push('/')
-  }
+  if (token) history.push(Routes.HOME)
 
   const disabledButton =
     isFetching ||

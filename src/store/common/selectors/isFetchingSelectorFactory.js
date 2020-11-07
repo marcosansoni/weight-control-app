@@ -1,3 +1,3 @@
-const isFetchingSelectorFactory = (entity) => (state) => state[entity].isFetching
+const isFetchingSelectorFactory = (view) => (state) => state[view].isFetching
 
 export default isFetchingSelectorFactory
