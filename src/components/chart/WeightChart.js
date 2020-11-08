@@ -15,7 +15,7 @@ import dataWeightDifferenceChart from '../../utils/weight/dataWeightDifferenceCh
 
 const Container = styled.div`
   display: flex;
-  width: ${`calc(100% - ${Size.PX_400})`};
+  width: ${`calc(100% - ${Size.PX_550})`};
   justify-content: center;
   padding: ${`${Size.PX_64} 0 ${Size.PX_64} ${Size.PX_64}`};
   flex-direction: column;
@@ -51,9 +51,9 @@ const mapData = (weights, type, previousOption, interval) => {
 }
 
 const WeightChart = (props) => {
-  const { weights, isFetching } = props
+  const { weights, isFetching, interval, onChangeInterval } = props
 
-  const [interval, setInterval] = useState(Interval.UNLIMITED)
+  // const [interval, setInterval] = useState(Interval.UNLIMITED)
   const [previousOption, setPreviousOption] = useState(PreviousOption.DAILY)
   const [type, setType] = useState(ChartType.WEIGHT)
 
@@ -71,7 +71,7 @@ const WeightChart = (props) => {
   }, [JSON.stringify(weights)])
 
   const handleChangeInterval = (updatedInterval) => {
-    setInterval(updatedInterval)
+    onChangeInterval(updatedInterval)
     setData(mapData(weights, type, previousOption, updatedInterval))
   }
 
@@ -215,6 +215,8 @@ const WeightChart = (props) => {
 WeightChart.propTypes = {
   weights: PropTypes.objectOf(PropTypes.any).isRequired,
   isFetching: PropTypes.bool,
+  interval: PropTypes.string.isRequired,
+  onChangeInterval: PropTypes.func.isRequired,
 }
 
 WeightChart.defaultProps = {

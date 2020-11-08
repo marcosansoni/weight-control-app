@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import Button from '@material-ui/core/Button'
@@ -17,6 +17,7 @@ import Snackbar from '../components/Snackbar'
 import errorsActionCreatorFactory from '../store/common/actionCreator/errorsActionCreatorFactory'
 import isFetchingSelectorFactory from '../store/common/selectors/isFetchingSelectorFactory'
 import WeightChart from '../components/chart/WeightChart'
+import Interval from '../utils/weight/Interval'
 
 const EmptyPlaceholder = styled.div`
   width: 100%;
@@ -77,15 +78,12 @@ const Home = () => {
   const errors = useSelector(errorSelectorFactory(View.WEIGHT))
   const isFetching = useSelector(isFetchingSelectorFactory(View.WEIGHT))
 
+  const [interval, setInterval] = useState(Interval.UNLIMITED)
+
   const renderHeader = () => {
     return (
       <Header>
         <Logo>Weight Control</Logo>
-        <AddButton
-          onClick={() => history.push(`${Routes.HOME}${Routes.ADD_WEIGHT}`)}
-        >
-          Add weight
-        </AddButton>
         <AddButton onClick={() => history.push(Routes.LOGOUT)}>
           Logout
         </AddButton>
@@ -96,7 +94,6 @@ const Home = () => {
   const handleDelete = (id) => {
     dispatch(deleteWeightActionCreator(id))
   }
-
 
   return (
     <>
@@ -109,11 +106,18 @@ const Home = () => {
           {Object.keys(weightsById).length ? (
             <>
               <WeightList
+                interval={interval}
                 weights={weightsById}
                 onDelete={handleDelete}
                 isFetching={isFetching}
+                onChangeInterval={setInterval}
               />
-              <WeightChart isFetching={isFetching} weights={weightsById} />
+              <WeightChart
+                isFetching={isFetching}
+                weights={weightsById}
+                interval={interval}
+                onChangeInterval={setInterval}
+              />
             </>
           ) : (
             <EmptyPlaceholder>

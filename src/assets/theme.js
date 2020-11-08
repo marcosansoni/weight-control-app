@@ -1,6 +1,7 @@
-export const DEFAULT_THEME = 'light';
-export const DARK_THEME = 'dark';
-export const getGradient = (top, bottom) => `linear-gradient(180deg, ${top} 0%, ${bottom} 100%)`;
+export const DEFAULT_THEME = 'light'
+export const DARK_THEME = 'dark'
+export const getGradient = (top, bottom) =>
+  `linear-gradient(180deg, ${top} 0%, ${bottom} 100%)`
 
 /**
  * The Palette represents the entire set of color codes used inside the application.
@@ -19,7 +20,7 @@ export const palette = {
   WHITE: '#ffffff',
   // PRIMARY_LIGHT: '#BDEFEA',
   PRIMARY_LIGHT: '#68ad40',
-  PRIMARY_STANDARD: '#40c1bb',
+  PRIMARY_STANDARD: '#2F80ED',
   PRIMARY_SHADOW: '#24adad',
   PRIMARY_DARK: '#0b7f8e',
   // Secondary
@@ -42,7 +43,9 @@ export const palette = {
   BLACK: '#333333',
   // Utils
   TRANSPARENT: 'transparent',
-};
+  // LINEAR: 'linear-gradient(to top, #373b44, #4286f4)',
+  LINEAR: 'linear-gradient(to left, #74ebd5, #acb6e5)',
+}
 
 /**
  * A Color represents a "name" of a specific theme property.
@@ -75,7 +78,8 @@ export const Color = {
   TEXT: 'text',
   NEUTRAL: 'neutral',
   BORDER: 'border',
-};
+  LINEAR: 'linear',
+}
 
 const defaultTheme = {
   [Color.PRIMARY]: palette.PRIMARY_SHADOW,
@@ -105,7 +109,8 @@ const defaultTheme = {
   [Color.TEXT]: palette.GREY_SHADOW,
   [Color.NEUTRAL]: palette.GREY_NEUTRAL,
   [Color.BORDER]: palette.GREY_LIGHT,
-};
+  [Color.LINEAR]: palette.LINEAR,
+}
 
 const darkTheme = {
   [Color.PRIMARY]: palette.PRIMARY_LIGHT,
@@ -135,11 +140,11 @@ const darkTheme = {
   [Color.TEXT]: palette.GREY_SUPER_LIGHT,
   [Color.NEUTRAL]: palette.GREY_NEUTRAL,
   [Color.BORDER]: palette.GREY_DARK,
-};
+}
 
 const themes = {
   [DEFAULT_THEME]: defaultTheme,
   [DARK_THEME]: darkTheme,
-};
+}
 
-export default themes;
+export default themes

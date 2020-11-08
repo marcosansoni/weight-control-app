@@ -2,11 +2,13 @@ import styled from 'styled-components'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Size from '../utils/size/Size'
+import { Color } from '../assets/theme'
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background: ${p => p.theme[Color.LINEAR]};
 `
 
 const Header = styled.div`
@@ -19,7 +21,7 @@ const Header = styled.div`
 `
 
 const Grid = styled.div`
-  max-width: 1480px;
+  //max-width: 1480px;
   width: 100%;
   height: 100%;
 `
