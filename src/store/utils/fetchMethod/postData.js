@@ -6,7 +6,7 @@ function* postData({ url, data }) {
   // Get the session used for api call
   const token = yield select(tokenSelector)
 
-  console.log(data)
+  // console.log(data)
 
   return yield axios(
     {

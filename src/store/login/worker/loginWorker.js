@@ -11,8 +11,6 @@ function* loginWorker(action) {
   try {
     const { email, password } = action?.payload || {}
 
-    console.log(urlFactory())
-
     const response = yield postData({
       url: urlFactory(PathAPI.LOGIN),
       data: { email, password },
@@ -31,7 +29,6 @@ function* loginWorker(action) {
 
     return yield put(loginCompleteActionCreator({}))
   } catch (e) {
-    console.log(e)
     // Stop fetching into all the other scenario
     return yield put(stopFetchingActionCreatorFactory(View.LOGIN))
   }

@@ -4,6 +4,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import Button from '@material-ui/core/Button'
+import CloseIcon from '@material-ui/icons/Close';
 import { useMediaQuery, useTheme } from '@material-ui/core'
 import styled from 'styled-components'
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
@@ -20,6 +21,7 @@ import requiredValidator from '../utils/validation/commonValidators/requiredVali
 import ValidationStatus from '../utils/validation/ValidationStatus'
 import Routes from '../Routes'
 import createWeightActionCreator from '../store/weights/actionCreator/createWeightActionCreator'
+import { Color } from '../assets/theme'
 
 const Spaced = styled.div`
   width: 100%;
@@ -32,6 +34,16 @@ const Spaced = styled.div`
 const Title = styled.div`
   font-weight: bold;
   font-size: ${Size.PX_20};
+`
+
+const Add = styled.div`
+  padding: ${Size.PX_16};
+  color: ${p => p.theme[Color.PRIMARY_STANDARD]};
+  cursor: pointer;
+  
+  :hover{
+    text-decoration: underline;
+  }
 `
 
 const AddWeight = () => {
@@ -73,11 +85,13 @@ const AddWeight = () => {
       <DialogTitle
         id="customized-dialog-title"
         onClose={handleClose}
-        style={{ minWidth: Size.PX_480 }}
+        style={{ minWidth: Size.PX_480, position: 'relative' }}
       >
         <Spaced>
           <Title>Add Weight</Title>
-          <Button style={{ minWidth: 0 }} onClick={handleClose}>X</Button>
+          <Button style={{ minWidth: 0, position: 'absolute', right: 8, top: 8 }} onClick={handleClose}>
+            <CloseIcon />
+          </Button>
         </Spaced>
       </DialogTitle>
       <DialogContent dividers>
@@ -89,7 +103,7 @@ const AddWeight = () => {
         >
           <div style={{ paddingTop: Size.PX_8 }}>
             <Input
-              style={{ width: '100%' }}
+              style={{ width: '100%', fontFamily: 'Poppins !important', }}
               type="number"
               placeholder="Insert your weight"
               value={weight}
@@ -130,9 +144,7 @@ const AddWeight = () => {
         </Field>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleAddWeight} color="primary">
-          Add
-        </Button>
+        <Add onClick={handleAddWeight}>ADD</Add>
       </DialogActions>
     </Dialog>
   )

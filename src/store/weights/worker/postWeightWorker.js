@@ -23,7 +23,7 @@ function* postWeightWorker(action) {
     }
 
     if (status === 200 && success) {
-      console.log('here')
+      // console.log('here')
       return yield put(weightsRequestActionCreator())
     }
 

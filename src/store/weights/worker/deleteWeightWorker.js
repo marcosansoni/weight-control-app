@@ -20,7 +20,7 @@ function* deleteWeightWorker(action) {
       return yield put(errorsActionCreatorFactory(View.WEIGHT, errors))
     }
     if (status === 200 && success) {
-      console.log('here')
+      // console.log('here')
       return yield put(weightsRequestActionCreator())
     }
 
