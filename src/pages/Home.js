@@ -43,13 +43,12 @@ const StyledButton = styled(Button)`
   }
 `
 
-const AddButton = styled.div`
-  border-radius: ${Size.PX_4};
+const Logout = styled.div`
   padding: ${Size.PX_8};
   cursor: pointer;
-
-  :hover {
-    background-color: ${(p) => p.theme[Color.SECONDARY]};
+  
+  :hover{
+    text-decoration: underline;
   }
 `
 
@@ -84,9 +83,9 @@ const Home = () => {
     return (
       <Header>
         <Logo>Weight Control</Logo>
-        <AddButton onClick={() => history.push(Routes.LOGOUT)}>
+        <Logout onClick={() => history.push(Routes.LOGOUT)}>
           Logout
-        </AddButton>
+        </Logout>
       </Header>
     )
   }

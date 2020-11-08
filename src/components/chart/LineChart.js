@@ -8,14 +8,18 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { useTheme } from 'styled-components'
 import Size from '../../utils/size/Size'
+import { Color } from '../../assets/theme'
 
 const LineChart = (props) => {
   const { data, height, width } = props
 
+  const theme = useTheme()
+
   return (
     <RechartsLineChart
-      style={{ margin: Size.PX_20 }}
+      style={{ margin: Size.PX_20, color: theme[Color.ON_BACKGROUND] }}
       width={width}
       height={height}
       data={data}
@@ -28,8 +32,8 @@ const LineChart = (props) => {
         connectNulls
         type="monotone"
         dataKey="weight"
-        stroke="#8884d8"
-        fill="#8884d8"
+        stroke={theme[Color.PRIMARY_STANDARD]}
+        fill={theme[Color.PRIMARY_STANDARD]}
       />
     </RechartsLineChart>
   )

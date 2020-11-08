@@ -11,6 +11,7 @@ import { filterWeight, sortWeightDescending } from '../../utils/weight/dataWeigh
 import { Color } from '../../assets/theme'
 import Interval from '../../utils/weight/Interval'
 import Routes from '../../Routes'
+import Button from '../input/Button'
 
 const List = styled.div`
   width: ${Size.PX_550};
@@ -54,30 +55,30 @@ const Container = styled.div`
   padding-right: ${Size.PX_24};
 `
 
-const FilterButton = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: ${Size.PX_4};
-  border: ${(p) => `1px solid ${p.theme[Color.PRIMARY_STANDARD]}`};
-  color: ${(p) =>
-    !p.selected ? p.theme[Color.PRIMARY_STANDARD] : p.theme[Color.BACKGROUND]};
-  font-size: ${Size.PX_14};
-  font-weight: normal;
-  margin-left: ${Size.PX_8};
-  width: ${Size.PX_75};
-  height: ${Size.PX_32};
-  cursor: ${(p) => !p.selected && 'pointer'};
-  background-color: ${(p) =>
-    p.selected && `${p.theme[Color.PRIMARY_STANDARD]}`};
-
-  :hover {
-    background-color: ${(p) =>
-      !p.selected && `${p.theme[Color.PRIMARY_STANDARD]}85`};
-    color: ${(p) => !p.selected && p.theme[Color.BACKGROUND]};
-  }
-`
+// const FilterButton = styled.div`
+//   box-sizing: border-box;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   border-radius: ${Size.PX_4};
+//   border: ${(p) => `1px solid ${p.theme[Color.PRIMARY_STANDARD]}`};
+//   color: ${(p) =>
+//     !p.selected ? p.theme[Color.PRIMARY_STANDARD] : p.theme[Color.BACKGROUND]};
+//   font-size: ${Size.PX_14};
+//   font-weight: normal;
+//   margin-left: ${Size.PX_8};
+//   width: ${Size.PX_75};
+//   height: ${Size.PX_32};
+//   cursor: ${(p) => !p.selected && 'pointer'};
+//   background-color: ${(p) =>
+//     p.selected && `${p.theme[Color.PRIMARY_STANDARD]}`};
+//
+//   :hover {
+//     background-color: ${(p) =>
+//       !p.selected && `${p.theme[Color.PRIMARY_STANDARD]}85`};
+//     color: ${(p) => !p.selected && p.theme[Color.BACKGROUND]};
+//   }
+// `
 
 const WeightList = (props) => {
   const { weights, onDelete, isFetching, interval, onChangeInterval } = props
@@ -112,30 +113,30 @@ const WeightList = (props) => {
           <Add onClick={()=> history.push(Routes.HOME+Routes.ADD_WEIGHT)}>Add new</Add>
         </Row>
         <Row style={{ justifyContent: 'flex-end' }}>
-          <FilterButton
+          <Button
             selected={interval === Interval.DAYS_7}
             onClick={() => onChangeInterval(Interval.DAYS_7)}
           >
             7 Days
-          </FilterButton>
-          <FilterButton
+          </Button>
+          <Button
             selected={interval === Interval.DAYS_30}
             onClick={() => onChangeInterval(Interval.DAYS_30)}
           >
             30 Days
-          </FilterButton>
-          <FilterButton
+          </Button>
+          <Button
             selected={interval === Interval.DAYS_90}
             onClick={() => onChangeInterval(Interval.DAYS_90)}
           >
             90 Days
-          </FilterButton>
-          <FilterButton
+          </Button>
+          <Button
             selected={interval === Interval.UNLIMITED}
             onClick={() => onChangeInterval(Interval.UNLIMITED)}
           >
             All
-          </FilterButton>
+          </Button>
         </Row>
       </Header>
       <div style={{ overflow: 'hidden', padding: '0 0 16px 0' }}>

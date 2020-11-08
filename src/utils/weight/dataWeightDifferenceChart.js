@@ -1,8 +1,7 @@
 import moment from 'moment'
-import Interval, { fromIntervalToDays } from './Interval'
 import PreviousOption from './PreviousOption'
 import { DATE_FORMAT } from '../stats/previousWeightCard'
-import { sortWeight } from './dataWeightAbsoluteChart'
+import { filterWeight, sortWeight } from './dataWeightAbsoluteChart'
 
 const differenceWeight = (weights, previousOption) => {
   return weights.map((w) => {
@@ -29,28 +28,31 @@ const differenceWeight = (weights, previousOption) => {
     return {
       name: moment.utc(w.date).format(DATE_FORMAT),
       weight: previousWeight
-        ? Number(w.weight - previousWeight.weight).toFixed(2)
+        ? Number(w.weight - previousWeight.weight).toFixed(1)
         : null,
     }
   })
 }
 
 const dataWeightDifferenceChart = (weights, interval, previousOption) => {
-  const today = moment.utc()
+  // const today = moment.utc()
+  //
+  // const filterWeights =
+  //   interval !== Interval.UNLIMITED
+  //     ? Object.values(weights).filter((w) => {
+  //         return moment
+  //           .utc(w.date)
+  //           .add(fromIntervalToDays(interval), 'days')
+  //           .isAfter(today)
+  //       })
+  //     : Object.values(weights)
+  //
+  // console.log(differenceWeight(sortWeight(filterWeight(weights, interval)), previousOption))
 
-  const filterWeights =
-    interval !== Interval.UNLIMITED
-      ? Object.values(weights).filter((w) => {
-          return moment
-            .utc(w.date)
-            .add(fromIntervalToDays(interval), 'days')
-            .isAfter(today)
-        })
-      : Object.values(weights)
-
-  console.log(differenceWeight(sortWeight(filterWeights), previousOption))
-
-  return differenceWeight(sortWeight(filterWeights), previousOption)
+  return differenceWeight(
+    sortWeight(filterWeight(weights, interval)),
+    previousOption
+  )
 }
 
 export default dataWeightDifferenceChart
