@@ -59,7 +59,7 @@ const WeightChart = (props) => {
 
   useEffect(() => {
     setData(mapData(weights, type, previousOption, interval))
-  }, [JSON.stringify(weights)])
+  }, [JSON.stringify(weights), interval])
 
   const handleChangeChart = (updatedType) => {
     setType(updatedType)
