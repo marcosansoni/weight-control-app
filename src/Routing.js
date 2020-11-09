@@ -38,6 +38,9 @@ const Routing = () => {
         <Route exact path={Routes.LOGOUT}>
           <Logout />
         </Route>
+        <Route exact path="/">
+          <Redirect to={Routes.LOGIN} />
+        </Route>
         {/* <Route exact path={Route.SIGN_UP}> */}
         {/*  <SignUp /> */}
         {/* </Route> */}
